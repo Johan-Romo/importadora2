@@ -10,6 +10,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -27,7 +28,8 @@ import { NgxTinymceModule } from 'ngx-tinymce';
      NgbPaginationModule,
      EditClienteComponent,
      CreateProductoComponent,
-     NgxTinymceModule
+     NgxTinymceModule,
+     IndexProductoComponent 
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

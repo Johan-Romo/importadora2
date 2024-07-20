@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var port = process.env.PORT || 4201;
 var cliente_route = require('./routes/cliente');
 var admin_route = require('./routes/admin');
+var producto_route = require('./routes/producto');
 const cors = require('cors');
 
 async function startServer() {
@@ -28,6 +29,7 @@ app.use(express.json({ limit: '50mb', extended: true }));
 app.use(cors());
 app.use('/api',cliente_route);
 app.use('/api',admin_route);
+app.use('/api',producto_route);
 startServer();
 
 module.exports = app;

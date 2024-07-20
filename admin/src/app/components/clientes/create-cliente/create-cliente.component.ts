@@ -34,7 +34,6 @@ export class CreateClienteComponent implements OnInit {
   
   registro(registroForm: any) {
     if (registroForm.valid) {
-      console.log(this.cliente);
       this._clienteService.registro_cliente_admin(this.cliente,this.token).subscribe(
         response=>{
           console.log(response);

@@ -3,10 +3,10 @@ import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router'; // Importa RouterModule
-import { ClienteService } from '../../../services/cliente.service';
 import { AdminService } from '../../../services/admin.service';
-import { Router } from '@angular/router'; // Importa RouterModule
 import { NgxTinymceModule } from 'ngx-tinymce';
+import { ProductoService } from '../../../services/producto.service';
+import { response } from 'express';
 
 declare var iziToast : any;
 declare var jQuery: any;
@@ -34,12 +34,17 @@ export class CreateProductoComponent implements OnInit{
   public file: File | undefined;
   imgSelect: any | ArrayBuffer = 'assets/img/01.jpg';
   public config : any ={};
+  public token:any ;
 
-
-  constructor(){
+  constructor(
+    private _productoService : ProductoService,
+    private _adminService : AdminService
+  ){
     this.config={
       heigh: 500
     }
+
+    this.token= this._adminService.getToken();
   }
 
   ngOnInit(): void {
@@ -48,7 +53,16 @@ export class CreateProductoComponent implements OnInit{
 
   registro(registroForm:any){
     if (registroForm.valid){
-
+      console.log(this.producto);
+      console.log(this.file);
+      this._productoService.registro_producto_admin(this.producto, this.file, this.token).subscribe(
+        response=>{
+          console.log(response);
+        },
+        error=>{
+          console.log(error);
+        }
+      );
     }else{
       iziToast.show({
         title: 'ERROR',
