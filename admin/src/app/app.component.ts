@@ -9,6 +9,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
+import { NgxTinymceModule } from 'ngx-tinymce';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,10 +26,20 @@ import { CreateProductoComponent } from './components/productos/create-producto/
      IndexClienteComponent,
      NgbPaginationModule,
      EditClienteComponent,
-     CreateProductoComponent
+     CreateProductoComponent,
+     NgxTinymceModule
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+ 
+  providers: [
+    { 
+      provide: NgxTinymceModule,
+      useValue: NgxTinymceModule.forRoot({
+        baseURL: '../../assets/tinymce/'
+      })
+    }
+  ]
 })
 export class AppComponent {
   title = 'admin';

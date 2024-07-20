@@ -6,25 +6,40 @@ import { RouterModule } from '@angular/router'; // Importa RouterModule
 import { ClienteService } from '../../../services/cliente.service';
 import { AdminService } from '../../../services/admin.service';
 import { Router } from '@angular/router'; // Importa RouterModule
+import { NgxTinymceModule } from 'ngx-tinymce';
+
 declare var iziToast : any;
 declare var jQuery: any;
 declare var $: any;
 @Component({
   selector: 'app-create-producto',
   standalone: true,
-  imports: [SidebarComponent, CommonModule,FormsModule, RouterModule],
+  imports: [SidebarComponent, CommonModule,FormsModule, RouterModule,NgxTinymceModule],
   templateUrl: './create-producto.component.html',
-  styleUrl: './create-producto.component.css'
+  styleUrl: './create-producto.component.css',
+  providers: [
+    { 
+      provide: NgxTinymceModule,
+      useValue: NgxTinymceModule.forRoot({
+        baseURL: '../../assets/tinymce/'
+      })
+    }
+  ]
 })
 export class CreateProductoComponent implements OnInit{
 
-  public producto : any ={};
+  public producto : any ={
+    categoria: ''
+  };
   public file: File | undefined;
   imgSelect: any | ArrayBuffer = 'assets/img/01.jpg';
+  public config : any ={};
 
 
   constructor(){
-
+    this.config={
+      heigh: 500
+    }
   }
 
   ngOnInit(): void {
