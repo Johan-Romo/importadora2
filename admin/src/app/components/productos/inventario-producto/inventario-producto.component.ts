@@ -122,6 +122,27 @@ registro_inventario(inventarioForm:any){
       this._productoService.registro_inventario_producto_admin(data, this.token).subscribe(
           response=>{
             console.log(response);
+            iziToast.show({
+              title: 'SUCESS',
+              titleColor: '#74c822',
+              color: '#FFF',
+              class: 'text-succes',
+              position: 'topRight',
+              message: 'Agregado el nuevo stock'
+            });
+
+            this._productoService.listar_inventario_producto_admin(this.producto._id, this.token).subscribe(
+              response =>{
+                  this.inventarios = response.data;
+              },
+              error => {
+                console.log(error);
+              }
+    
+            )
+            this.cdr.detectChanges();
+           
+           
           },
           error =>{
             console.log(error);
