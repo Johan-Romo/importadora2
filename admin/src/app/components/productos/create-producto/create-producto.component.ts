@@ -6,8 +6,7 @@ import { RouterModule } from '@angular/router'; // Importa RouterModule
 import { AdminService } from '../../../services/admin.service';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { ProductoService } from '../../../services/producto.service';
-import { response } from 'express';
-
+import { Router } from '@angular/router'; // Importa RouterModule
 declare var iziToast : any;
 declare var jQuery: any;
 declare var $: any;
@@ -38,7 +37,8 @@ export class CreateProductoComponent implements OnInit{
 
   constructor(
     private _productoService : ProductoService,
-    private _adminService : AdminService
+    private _adminService : AdminService,
+    private _router: Router
   ){
     this.config={
       heigh: 500
@@ -58,6 +58,16 @@ export class CreateProductoComponent implements OnInit{
       this._productoService.registro_producto_admin(this.producto, this.file, this.token).subscribe(
         response=>{
           console.log(response);
+          iziToast.show({
+            title: 'SUCESS',
+            titleColor: '#74c822',
+            color: '#FFF',
+            class: 'text-succes',
+            position: 'topRight',
+            message: 'Producto Registrado'
+          });
+
+          this._router.navigate(['/panel/productos'])
         },
         error=>{
           console.log(error);
