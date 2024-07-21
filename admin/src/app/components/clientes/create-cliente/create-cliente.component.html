@@ -16,28 +16,30 @@
                 <div class="row">
                   <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Nombres</label>
-                    <input class="form-control" type="text" placeholder="Nombres Completos"  required name="nombres" [(ngModel)]="cliente.nombres">
+                    <input class="form-control" type="text" placeholder="Nombres Completos"  required name="nombres" [(ngModel)]="cliente.nombres" (input)="validateLetters($event)" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*">
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Apellidos</label>
-                    <input class="form-control" type="text" placeholder="Apellidos Completos"  required name="apellidps" [(ngModel)]="cliente.apellidos" >
+                    <input class="form-control" type="text" placeholder="Apellidos Completos"  required name="apellidps" [(ngModel)]="cliente.apellidos" (input)="validateLetters($event)" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*">
                   </div>
                   <div class="col-md-4 form-group">
-                    <label for="validationCustom01" class="form-label">Correo electrónico</label>
-                    <input class="form-control" type="email" placeholder="Correo"  required  name="email" [(ngModel)]="cliente.email">
-                  </div>
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input class="form-control" id="email" type="email" placeholder="Correo electrónico" required name="email" [(ngModel)]="cliente.email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                    <div *ngIf="registroForm.submitted && !registroForm.form.controls['email'].valid" class="text-danger">
+                        El correo electrónico no es válido.
+                    </div>                  </div>
 
                   <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Telefono</label>
-                    <input class="form-control" type="text" placeholder="Telefono"  required name="telefono" [(ngModel)]="cliente.telefono">
+                    <input class="form-control" type="text" placeholder="Telefono"  required name="telefono" [(ngModel)]="cliente.telefono" (input)="validateNumbers($event)" pattern="[0-9]*">
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Fecha nacimiento</label>
-                    <input class="form-control" type="date" placeholder="Fecha Nacimiento"  required name="f_nacimiento" [(ngModel)]="cliente.f_nacimiento">
+                    <input class="form-control" type="date" placeholder="Fecha Nacimiento"  required name="f_nacimiento" [(ngModel)]="cliente.f_nacimiento" max="2024-12-31" min="1900-12-31">
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="validationCustom01" class="form-label">Cedula</label>
-                    <input class="form-control" type="number" placeholder="Cedula"  required name="dni" [(ngModel)]="cliente.dni">
+                    <input class="form-control" type="string" placeholder="Cedula"  required name="dni" [(ngModel)]="cliente.dni" (input)="validateNumbers($event)" pattern="[0-9]*">
                   </div>
 
                   <div class="col-md-4">

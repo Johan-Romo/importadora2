@@ -151,6 +151,8 @@ export class CreateProductoComponent implements OnInit{
       console.log(this.file);
     }
 
+
+
 }
 
 

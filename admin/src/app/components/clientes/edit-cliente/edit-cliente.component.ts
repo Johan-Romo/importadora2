@@ -84,4 +84,21 @@ export class EditClienteComponent implements OnInit{
     }
   }
 
+
+    
+  validateLetters(event: any): void {
+    const input = event.target;
+    const pattern = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/;
+    if (!pattern.test(input.value)) {
+      input.value = input.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+    }
+  }
+
+  validateNumbers(event: any): void {
+    const input = event.target;
+    const pattern = /^[0-9]*$/;
+    if (!pattern.test(input.value)) {
+      input.value = input.value.replace(/[^0-9]/g, '');
+    }
+  }
 }

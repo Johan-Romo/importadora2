@@ -28,9 +28,9 @@
                   <!-- Inline form -->
 <form #inventarioForm="ngForm"  (ngSubmit)="registro_inventario(inventarioForm)" class="form-inline">
   <label class="sr-only">Cantidad</label>
-  <input class="form-control mb-3 mr-sm-4" type="number" placeholder="Cantidad" required name="cantidad" [(ngModel)]="inventario.cantidad">
+  <input class="form-control mb-3 mr-sm-4" type="number" placeholder="Cantidad" required name="cantidad" [(ngModel)]="inventario.cantidad" min="0">
   <label class="sr-only">Proveedor</label>
-  <input class="form-control mb-3 mr-sm-4" type="text" placeholder="Proveedor" required name="proveedor" [(ngModel)]="inventario.proveedor"> 
+  <input class="form-control mb-3 mr-sm-4" type="text" placeholder="Proveedor" required name="proveedor" [(ngModel)]="inventario.proveedor" min="0"> 
 
   <button class="btn btn-primary mb-3" type="submit">Registrar inventario </button>
 </form>
