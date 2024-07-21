@@ -45,6 +45,7 @@
                 <table class="table table-bordered">
                   <thead class=" thead-dark">
                     <tr>
+                      <th>Fecha</th>
                       <th>Admin</th>
                       <th>Cantidad</th>
                       <th>Proveedor</th>
@@ -65,6 +66,7 @@
                   <ng-container>
                     <tbody *ngFor="let item of inventarios ">
                         <tr>
+                          <td>{{ item.createdAt | date:'yyyy-MM-dd' }}</td>
                           <td>{{item.admin.nombres}} {{item.admin.apellidos}}</td>
                           <td>{{item.cantidad}}</td>
                           <td>{{item.proveedor}}</td>

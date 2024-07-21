@@ -4,6 +4,7 @@ var Inventario = require('../models/inventario');
 var fs = require('fs');
 var path =require('path');
 const producto = require('../models/producto');
+const { create } = require('domain');
 const registro_producto_admin = async function (req,res){
  
         if (req.user){
@@ -55,7 +56,7 @@ const listar_inventario_producto_admin = async function(req, res)
     if (req.user){
         if(req.user.role === 'admin'){
             var id = req.params['id'];
-            let reg = await Inventario.find({producto: id}).populate('admin');
+            let reg = await Inventario.find({producto: id}).populate('admin').sort({createdAt:-1});
             res.status(200).send({data: reg});
         }else{
             res.status(500).send({message: 'No Acces'});
