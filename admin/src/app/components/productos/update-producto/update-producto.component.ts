@@ -87,7 +87,7 @@ export class UpdateProductoComponent implements OnInit {
             color: '#FFF',
             class: 'text-succes',
             position: 'topRight',
-            message: ' Producto Modificado'
+            message: 'Producto Modificado'
           });
        
           this._router.navigate(['/panel/productos'])
