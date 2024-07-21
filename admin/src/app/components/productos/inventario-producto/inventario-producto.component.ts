@@ -22,7 +22,9 @@ export class InventarioProductoComponent implements OnInit {
   public token:any ;
   public url:any;
   public id:any;
+  public _iduser;
   public producto : any ={};
+  public inventario : any ={};
   public inventarios : Array<any>= [];
   constructor(
     private _productoService : ProductoService,
@@ -34,6 +36,7 @@ export class InventarioProductoComponent implements OnInit {
 
     this.token= this._adminService.getToken();
     this.url=GLOBAL.url;
+    this._iduser = localStorage.getItem('_id');
   }
 
   ngOnInit(): void {
@@ -76,7 +79,7 @@ eliminar(id: any){
           color: '#FFF',
           class: 'text-succes',
           position: 'topRight',
-          message: 'Producto Eliminado'
+          message: 'Registro de inventario Eliminado'
         });
         $('#delete-'+id).modal('hide');
         $('body').removeClass('modal-open');
@@ -105,5 +108,36 @@ eliminar(id: any){
     }
 
   )
+}
+
+registro_inventario(inventarioForm:any){
+    if (inventarioForm.valid){
+      let data = {
+        producto: this.producto._id,
+        cantidad: inventarioForm.value.cantidad,
+        admin: this._iduser,
+        proveedor: inventarioForm.value.proveedor
+      }
+
+      this._productoService.registro_inventario_producto_admin(data, this.token).subscribe(
+          response=>{
+            console.log(response);
+          },
+          error =>{
+            console.log(error);
+          }
+
+      )
+      
+    }else{
+          iziToast.show({
+            title: 'ERROR',
+            titleColor: '#FF0000',
+            color: '#FFF',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'Los datos del formulario no son validos'
+          });
+    }
 }
 }

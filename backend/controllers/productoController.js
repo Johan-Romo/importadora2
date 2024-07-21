@@ -197,6 +197,25 @@ const eliminar_inventario_producto_admin = async function(req,res){
     }
 }
 
+const registro_inventario_prodcuto_admin = async function(req,res){
+    if (req.user){
+        if(req.user.role === 'admin'){
+            let data =req.body;
+            let reg = await Inventario.create(data);
+            let pro= await Producto.findById({_id:reg.producto});
+            let nuevo_stock = parseInt(pro.stock) + parseInt(reg.cantidad);
+            let producto = await Producto.findByIdAndUpdate({_id: reg.producto},{
+                stock: nuevo_stock
+            });
+            res.status(200).send({data:reg});
+        }else{
+            res.status(500).send({message: 'No Acces'});
+        }
+    }else{
+        res.status(500).send({message: 'No Acces'});
+    }
+}
+
 module.exports={
     registro_producto_admin,
     listar_producto_admin,
@@ -205,6 +224,7 @@ module.exports={
     actualizar_producto_admin,
     eliminar_producto_admin,
     listar_inventario_producto_admin,
-    eliminar_inventario_producto_admin
+    eliminar_inventario_producto_admin,
+    registro_inventario_prodcuto_admin
 
 }
