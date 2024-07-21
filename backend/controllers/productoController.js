@@ -1,7 +1,9 @@
 'use strict'
 var Producto = require('../models/producto');
+var Inventario = require('../models/inventario');
 var fs = require('fs');
 var path =require('path');
+const producto = require('../models/producto');
 const registro_producto_admin = async function (req,res){
  
         if (req.user){
@@ -14,7 +16,14 @@ const registro_producto_admin = async function (req,res){
                 data.portada=portada_name;
                 let reg = await Producto.create(data);
 
-                res.status(200).send({data:reg});
+                let inventario = await Inventario.create({
+                    admin: req.user.sub,
+                    cantidad: data.stock,
+                    proveedor: 'Primer registro',
+                    producto: reg._id
+                })
+
+                res.status(200).send({data:reg, invetario: inventario});
                 
             }else{
                 res.status(500).send({message: 'No Acces'});
@@ -41,6 +50,22 @@ const listar_producto_admin = async function (req, res){
     }
 }
 
+const listar_inventario_producto_admin = async function(req, res)
+{
+    if (req.user){
+        if(req.user.role === 'admin'){
+            var id = req.params['id'];
+            let reg = await Inventario.find({producto: id}).populate('admin');
+            res.status(200).send({data: reg});
+        }else{
+            res.status(500).send({message: 'No Acces'});
+            
+        }
+    }else{
+        res.status(500).send({message: 'No Acces'});
+    }
+
+}
 const obtener_portada = async function (req,res){
     var img = req.params['img'];
    
@@ -64,7 +89,7 @@ const obtener_producto_admin = async function(req,res){
                 var reg = await Producto.findById({_id:id});
                 res.status(200).send({data:reg});
             }catch(error){
-                res.status(200).send({data:undefined});
+                res.status(500).send({data:undefined});
             }
 
         }else{
@@ -152,12 +177,34 @@ const eliminar_producto_admin = async function(req,res){
     }
 }
 
+const eliminar_inventario_producto_admin = async function(req,res){
+    if (req.user){
+        if(req.user.role === 'admin'){
+            var id = req.params['id'];
+
+            let reg = await Inventario.findByIdAndDelete({_id:id});
+            let pro= await Producto.findById({_id:reg.producto});
+            let nuevo_stock = parseInt(pro.stock) - parseInt(reg.cantidad);
+            let producto= await Producto.findByIdAndUpdate({_id: reg.producto},{
+                stock: nuevo_stock
+            });
+            res.status(200).send({data:producto});
+        }else{
+            res.status(500).send({message: 'No Acces'});
+        }
+    }else{
+        res.status(500).send({message: 'No Acces'});
+    }
+}
+
 module.exports={
     registro_producto_admin,
     listar_producto_admin,
     obtener_portada,
     obtener_producto_admin,
     actualizar_producto_admin,
-    eliminar_producto_admin
+    eliminar_producto_admin,
+    listar_inventario_producto_admin,
+    eliminar_inventario_producto_admin
 
 }

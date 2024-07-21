@@ -8,6 +8,7 @@ import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cl
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
+import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 export const routes: Routes = [
 
     {path:'', redirectTo: 'inicio',pathMatch: 'full'},
@@ -20,5 +21,6 @@ export const routes: Routes = [
         {path: 'productos/registro', component: CreateProductoComponent, canActivate: [adminGuard]},
         {path: 'productos', component: IndexProductoComponent, canActivate: [adminGuard]},
         {path: 'productos/:id', component: UpdateProductoComponent, canActivate: [adminGuard]},
+        {path: 'productos/inventario/:id', component: InventarioProductoComponent, canActivate: [adminGuard]}
     ]}
 ];
