@@ -7,6 +7,7 @@ import { CreateClienteComponent } from './components/clientes/create-cliente/cre
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
+import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 export const routes: Routes = [
 
     {path:'', redirectTo: 'inicio',pathMatch: 'full'},
@@ -18,5 +19,6 @@ export const routes: Routes = [
         {path: 'clientes/:id', component: EditClienteComponent, canActivate: [adminGuard]},
         {path: 'productos/registro', component: CreateProductoComponent, canActivate: [adminGuard]},
         {path: 'productos', component: IndexProductoComponent, canActivate: [adminGuard]},
+        {path: 'productos/:id', component: UpdateProductoComponent, canActivate: [adminGuard]},
     ]}
 ];

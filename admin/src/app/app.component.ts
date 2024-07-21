@@ -30,7 +30,8 @@ import { UpdateProductoComponent } from './components/productos/update-producto/
      EditClienteComponent,
      CreateProductoComponent,
      NgxTinymceModule,
-     IndexProductoComponent 
+     IndexProductoComponent,
+     UpdateProductoComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

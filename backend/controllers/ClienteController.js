@@ -109,7 +109,7 @@ const obtener_cliente_admin = async function(req,res){
                 res.status(200).send({data:reg});
             }catch(error){
 
-                res.status(500).send({data:undefined});
+                res.status(200).send({data:undefined});
             }
 
         }else{
