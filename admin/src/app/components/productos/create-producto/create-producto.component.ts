@@ -35,6 +35,7 @@ export class CreateProductoComponent implements OnInit{
   public config : any ={};
   public token:any ;
 
+
   constructor(
     private _productoService : ProductoService,
     private _adminService : AdminService,
@@ -63,8 +64,7 @@ export class CreateProductoComponent implements OnInit{
           message: 'Suba una imagen'
         });
       }else{
-        console.log(this.producto);
-        console.log(this.file);
+      
         this._productoService.registro_producto_admin(this.producto, this.file, this.token).subscribe(
           response=>{
             console.log(response);
@@ -76,7 +76,7 @@ export class CreateProductoComponent implements OnInit{
               position: 'topRight',
               message: 'Producto Registrado'
             });
-
+           
             this._router.navigate(['/panel/productos'])
           },
           error=>{

@@ -8,8 +8,10 @@ import { NgxTinymceModule } from 'ngx-tinymce';
 import { ProductoService } from '../../../services/producto.service';
 import { GLOBAL } from '../../../services/GLOBAL';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef } from '@angular/core';
 declare var iziToast: any;
-
+declare var jQuery: any;
+declare var $: any;
 @Component({
   selector: 'app-index-producto',
   standalone: true,
@@ -22,11 +24,13 @@ export class IndexProductoComponent implements OnInit {
   public pageSize =20;
   public filtro = '';
   public token : any;
+  public load_data=true;
   public productos : Array<any> =[];
   public url: any;
   constructor(
     private _productoService : ProductoService,
-    private _adminService : AdminService
+    private _adminService : AdminService,
+    private cdr: ChangeDetectorRef
   ){
     this.token=localStorage.getItem('token');
     this.url=GLOBAL.url;
@@ -37,16 +41,16 @@ export class IndexProductoComponent implements OnInit {
   }
 
   init_data(){
-    this._productoService.listar_productos_admin(this.filtro, this.token).subscribe(
-      response =>{
-        console.log(response);
-        this.productos=response.data;
-      },
-      error=>{
-        console.log(error);
-      }
-
-    );
+      this._productoService.listar_productos_admin(this.filtro, this.token).subscribe(
+        response =>{
+          console.log(response);
+          this.productos=response.data;
+          this.load_data=false;
+        },
+        error=>{
+          console.log(error);
+        }
+      );
   }
 
   filtrar(){
@@ -55,6 +59,7 @@ export class IndexProductoComponent implements OnInit {
         response =>{
           console.log(response);
           this.productos=response.data;
+          this.load_data=false;
         },
         error=>{
           console.log(error);
@@ -76,5 +81,37 @@ export class IndexProductoComponent implements OnInit {
   resetear(){
        this.filtro='';
       this.init_data();
+  }
+
+  eliminar(id:any){
+    this._productoService.eliminar_producto_admin(id,this.token).subscribe(
+      response=>{
+          iziToast.show({
+            title: 'SUCESS',
+            titleColor: '#74c822',
+            color: '#FFF',
+            class: 'text-succes',
+            position: 'topRight',
+            message: 'Producto Eliminado'
+          });
+          $('#delete-'+id).modal('hide');
+          $('body').removeClass('modal-open');
+          $('.modal-backdrop').remove();
+          this.init_data();
+          this.cdr.detectChanges();
+        
+      },
+      error=>{
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          color: '#FFF',
+          class: 'text-danger',
+          position: 'topRight',
+          message: 'Error al eliminar'
+        });
+      }
+
+    )
   }
 }

@@ -43,7 +43,7 @@ const listar_producto_admin = async function (req, res){
 
 const obtener_portada = async function (req,res){
     var img = req.params['img'];
-    console.log(img);
+   
     fs.stat('./uploads/productos/'+ img, function(err){
         if (!err){
             let path_img = './uploads/productos/'+ img;
@@ -130,11 +130,34 @@ const actualizar_producto_admin = async function (req,res){
 }
 
 
+const eliminar_producto_admin = async function(req,res){
+    if (req.user){
+        if(req.user.role === 'admin'){
+            var id = req.params['id'];
+
+            let reg = await Producto.findByIdAndDelete({_id:id});
+            fs.stat('./uploads/productos/'+ reg.portada, function(err){
+                if (!err){
+                    fs.unlink('./uploads/productos/'+ reg.portada, (err)=>{
+                        if (err) throw err;
+                    });
+                }
+            })
+            res.status(200).send({data:reg});
+        }else{
+            res.status(500).send({message: 'No Acces'});
+        }
+    }else{
+        res.status(500).send({message: 'No Acces'});
+    }
+}
+
 module.exports={
     registro_producto_admin,
     listar_producto_admin,
     obtener_portada,
     obtener_producto_admin,
-    actualizar_producto_admin
+    actualizar_producto_admin,
+    eliminar_producto_admin
 
 }

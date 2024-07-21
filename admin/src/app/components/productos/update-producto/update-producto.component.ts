@@ -26,6 +26,7 @@ export class UpdateProductoComponent implements OnInit {
   public imgSelect : String | ArrayBuffer | null |undefined; 
   public url:any;
   public file: File | undefined;
+  
   constructor(
     private _productoService : ProductoService,
     private _adminService : AdminService,
@@ -49,9 +50,11 @@ export class UpdateProductoComponent implements OnInit {
               console.log(response);
               if (response.data==undefined){
                   this.producto=response.undefined;
+                  
               }else{
                   this.producto=response.data;
                   this.imgSelect=this.url+'obtener_portada/'+this.producto.portada;
+                  
               }
           },error=>{
             console.log(error);
@@ -74,6 +77,7 @@ export class UpdateProductoComponent implements OnInit {
       data.categoria= this.producto.categoria;
       data.descripcion= this.producto.descripcion;
       data.contenido= this.producto.contenido;
+      
       this._productoService.actualizar_producto_admin(data,this.id,this.token).subscribe(
         response=>{
           console.log(response);
@@ -85,6 +89,7 @@ export class UpdateProductoComponent implements OnInit {
             position: 'topRight',
             message: ' Producto Modificado'
           });
+       
           this._router.navigate(['/panel/productos'])
         },
         error=>{
