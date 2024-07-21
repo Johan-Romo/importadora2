@@ -31,7 +31,7 @@
                 <table class="table table-bordered">
                   <thead class=" thead-dark">
                     <tr>
-                      <th>#</th>
+                      <th>Imagen</th>
                       <th>Nombre de Producto</th>
                       <th>Stock</th>
                       <th>Precio</th>
@@ -42,7 +42,12 @@
                   </thead>
                   <tbody *ngFor="let item of productos">
                       <tr>
-                        <td>{{item._id}}</td>
+                        <td>
+                          <h6 style="padding-bottom: 0; margin-bottom: 0;">
+                            <img style="width: 125px;" [src]="url +'obtener_portada/'+item.portada" class="img-thumbnail rounded-0" alt="Square image">
+                          </h6>
+
+                        </td>
                         <td>{{item.titulo}}</td>
                         <td>{{item.stock}}</td>
                         <td>{{item.precio}}</td>

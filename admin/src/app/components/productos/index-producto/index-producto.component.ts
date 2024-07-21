@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router'; // Importa RouterModule
 import { AdminService } from '../../../services/admin.service';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { ProductoService } from '../../../services/producto.service';
+import { GLOBAL } from '../../../services/GLOBAL';
 @Component({
   selector: 'app-index-producto',
   standalone: true,
@@ -17,11 +18,13 @@ export class IndexProductoComponent implements OnInit {
   public filtro = '';
   public token : any;
   public productos : Array<any> =[];
+  public url: any;
   constructor(
     private _productoService : ProductoService,
     private _adminService : AdminService
   ){
     this.token=localStorage.getItem('token');
+    this.url=GLOBAL.url;
   }
 
   ngOnInit(): void {
