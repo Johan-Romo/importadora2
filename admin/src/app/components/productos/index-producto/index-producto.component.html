@@ -19,8 +19,9 @@
             <div class="row">
                 <div class="col-10">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Ingrese su producto a buscar">
-                    <button class="btn btn-primary" type="button">Buscar</button>
+                    <input class="form-control" type="text"  placeholder="Ingrese su producto a buscar" name="filtro" [(ngModel)]="filtro">
+                    <button class="btn btn-primary mr-4" type="button" (click)="filtrar()"  >Buscar</button>
+                    <button class="btn btn-info " type="button" (click)="resetear()"  >Mostrar todos</button>
                   </div>
                 </div>
             </div>
@@ -40,7 +41,7 @@
                       <th>Opciones</th>
                     </tr>
                   </thead>
-                  <tbody *ngFor="let item of productos">
+                  <tbody *ngFor="let item of productos | slice:(page-1)*pageSize : (page-1)*pageSize+ pageSize">
                       <tr>
                         <td>
                           <h6 style="padding-bottom: 0; margin-bottom: 0;">
@@ -72,7 +73,8 @@
             </div>
         </div>
         <div class="card-footer">
-           <!-- <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="clientes.length" >
-           </ngb-pagination>-->
+          <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="productos.length" >
+
+          </ngb-pagination>
         </div>
   </div>    

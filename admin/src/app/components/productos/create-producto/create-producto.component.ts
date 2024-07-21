@@ -53,26 +53,38 @@ export class CreateProductoComponent implements OnInit{
 
   registro(registroForm:any){
     if (registroForm.valid){
-      console.log(this.producto);
-      console.log(this.file);
-      this._productoService.registro_producto_admin(this.producto, this.file, this.token).subscribe(
-        response=>{
-          console.log(response);
-          iziToast.show({
-            title: 'SUCESS',
-            titleColor: '#74c822',
-            color: '#FFF',
-            class: 'text-succes',
-            position: 'topRight',
-            message: 'Producto Registrado'
-          });
+      if (this.file ==undefined){
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          color: '#FFF',
+          class: 'text-danger',
+          position: 'topRight',
+          message: 'Suba una imagen'
+        });
+      }else{
+        console.log(this.producto);
+        console.log(this.file);
+        this._productoService.registro_producto_admin(this.producto, this.file, this.token).subscribe(
+          response=>{
+            console.log(response);
+            iziToast.show({
+              title: 'SUCESS',
+              titleColor: '#74c822',
+              color: '#FFF',
+              class: 'text-succes',
+              position: 'topRight',
+              message: 'Producto Registrado'
+            });
 
-          this._router.navigate(['/panel/productos'])
-        },
-        error=>{
-          console.log(error);
-        }
-      );
+            this._router.navigate(['/panel/productos'])
+          },
+          error=>{
+            console.log(error);
+          }
+        );
+      }
+      
     }else{
       iziToast.show({
         title: 'ERROR',
