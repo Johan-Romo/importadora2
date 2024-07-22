@@ -3,79 +3,73 @@
     <h1 class="mt-2 mt-md-4 mb-3 pt-5">Clientes</h1>
     <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
       <p class="text-muted">Este módulo lista todos los clientes de la tienda.</p>
-      
     </div>
-  </div>
-  <form #updateForm="ngForm" (ngSubmit)="actualizar(updateForm)" >
+</div>
+<form #updateForm="ngForm" (ngSubmit)="actualizar(updateForm)">
 
     <div class="card box-shadow-sm">
-          <div class="card-header">
-              <h5 style="margin-bottom: 0px;">Actualizar cliente</h5>
-          </div>
-          <ng-container *ngIf="load_data">
+        <div class="card-header">
+            <h5 style="margin-bottom: 0px;">Actualizar cliente</h5>
+        </div>
+        <ng-container *ngIf="load_data">
             <div class="card-body">
-              <div class="row">
-                <div class="col-12 text-center">
-                  <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </div>
-
-              </div>
             </div>
-
-          </ng-container>
-          <ng-container *ngIf="!load_data" >
-            <div class="card-body" *ngIf="cliente!=undefined">
-              <div class="row">
-                <div class="col-md-4 form-group">
-                  <label for="validationCustom01" class="form-label">Nombres</label>
-                  <input class="form-control" type="text" placeholder="Nombres Completos"  required name="nombres" [(ngModel)]="cliente.nombres" (input)="validateLetters($event)" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*">
+        </ng-container>
+        <ng-container *ngIf="!load_data">
+            <div class="card-body" *ngIf="cliente != undefined">
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label for="nombre" class="form-label">Nombres</label>
+                        <input id="nombre" class="form-control" type="text" placeholder="Nombres Completos" name="nombres" [(ngModel)]="cliente.nombres" #nombres="ngModel" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="apellido" class="form-label">Apellidos</label>
+                        <input id="apellido" class="form-control" type="text" placeholder="Apellidos Completos" name="apellidos" [(ngModel)]="cliente.apellidos" #apellidos="ngModel" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input id="email" class="form-control" type="email" placeholder="Correo" name="email" [(ngModel)]="cliente.email" #email="ngModel" required email>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input id="telefono" class="form-control" type="text" placeholder="Teléfono" name="telefono" [(ngModel)]="cliente.telefono" #telefono="ngModel" required pattern="[0-9]{10}">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="f_nacimiento" class="form-label">Fecha de nacimiento</label>
+                        <input id="f_nacimiento" class="form-control" type="date" placeholder="Fecha de Nacimiento" name="f_nacimiento" [(ngModel)]="cliente.f_nacimiento" #f_nacimiento="ngModel" required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="dni" class="form-label">Cédula</label>
+                        <input id="dni" class="form-control" type="text" placeholder="Cédula" name="dni" [(ngModel)]="cliente.dni" #dni="ngModel" required pattern="[0-9]{10}">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="genero" class="form-label">Género</label>
+                        <select id="genero" class="form-control custom-select" name="genero" [(ngModel)]="cliente.genero" #genero="ngModel" required>
+                            <option value="" disabled selected>Seleccionar</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-4 form-group">
-                  <label for="validationCustom01" class="form-label">Apellidos</label>
-                  <input class="form-control" type="text" placeholder="Apellidos Completos"  required name="apellidps" [(ngModel)]="cliente.apellidos"(input)="validateLetters($event)" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*" >
-                </div>
-                <div class="col-md-4 form-group">
-                  <label for="validationCustom01" class="form-label">Correo electrónico</label>
-                  <input class="form-control" id="email" type="email" placeholder="Correo electrónico" required name="email" [(ngModel)]="cliente.email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-                </div>
-
-                <div class="col-md-4 form-group">
-                  <label for="validationCustom01" class="form-label">Telefono</label>
-                  <input class="form-control" type="text" placeholder="Telefono"  required name="telefono" [(ngModel)]="cliente.telefono"  (input)="validateNumbers($event)" pattern="[0-9]*">
-                </div>
-                <div class="col-md-4 form-group">
-                  <label for="validationCustom01" class="form-label">Fecha nacimiento</label>
-                  <input class="form-control" type="date" placeholder="Fecha Nacimiento"  required name="f_nacimiento" [(ngModel)]="cliente.f_nacimiento" max="2024-12-31" mix="1900-12-31">
-                </div>
-                <div class="col-md-4 form-group">
-                  <label for="validationCustom01" class="form-label">Cedula</label>
-                  <input class="form-control" type="number" placeholder="Cedula"  required name="dni" [(ngModel)]="cliente.dni"  (input)="validateNumbers($event)" pattern="[0-9]*">
-                </div>
-
-                <div class="col-md-4">
-                  <label for="validationCustom01" class="form-label">Genero</label>
-                  <select class="form-control custom-select" required name="genero" [(ngModel)]="cliente.genero">
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                  </select>
-                </div>
-              </div>
-          
-        </div>
-        <div class="card-body" *ngIf="cliente==undefined">
-              <h1>No se encontro el registro</h1> 
-        </div>
-          </ng-container>
-          <div class="card-footer">
-              <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Actualizar</button>
-              <button  *ngIf="load_btn" type="button" class="btn btn-secondary" disabled>
+            </div>
+            <div class="card-body" *ngIf="cliente == undefined">
+                <h1>No se encontró el registro</h1>
+            </div>
+        </ng-container>
+        <div class="card-footer">
+            <button *ngIf="!load_btn" class="btn btn-primary mr-3" type="submit">Actualizar</button>
+            <button *ngIf="load_btn" type="button" class="btn btn-secondary" disabled>
                 <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
                 Actualizando...
-              </button>
-              <button [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</button>
-          </div>      
-    </div> 
-  </form>
+            </button>
+            <button [routerLink]="['/panel/clientes']" class="btn btn-warning">Regresar</button>
+        </div>
+    </div>
+</form>
