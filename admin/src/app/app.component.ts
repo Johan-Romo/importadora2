@@ -13,6 +13,7 @@ import { NgxTinymceModule } from 'ngx-tinymce';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
+import { ConfigComponent } from './components/config/config.component';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ import { InventarioProductoComponent } from './components/productos/inventario-p
      NgxTinymceModule,
      IndexProductoComponent,
      UpdateProductoComponent,
-     InventarioProductoComponent
+     InventarioProductoComponent,
+     ConfigComponent 
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

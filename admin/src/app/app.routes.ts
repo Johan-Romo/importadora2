@@ -9,10 +9,11 @@ import { CreateProductoComponent } from './components/productos/create-producto/
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
+import { ConfigComponent } from './components/config/config.component';
 export const routes: Routes = [
 
     {path:'', redirectTo: 'inicio',pathMatch: 'full'},
-    { path: 'inicio', component: InicioComponent,canActivate:[adminGuard] },
+    { path: 'inicio', component: InicioComponent,canActivate:[adminGuard] }, 
     { path: 'login', component: LoginComponent },
     {path: 'panel', children:[
         {path: 'clientes', component: IndexClienteComponent, canActivate: [adminGuard]},
@@ -21,6 +22,7 @@ export const routes: Routes = [
         {path: 'productos/registro', component: CreateProductoComponent, canActivate: [adminGuard]},
         {path: 'productos', component: IndexProductoComponent, canActivate: [adminGuard]},
         {path: 'productos/:id', component: UpdateProductoComponent, canActivate: [adminGuard]},
-        {path: 'productos/inventario/:id', component: InventarioProductoComponent, canActivate: [adminGuard]}
+        {path: 'productos/inventario/:id', component: InventarioProductoComponent, canActivate: [adminGuard]},
+        {path: 'configuraciones', component: ConfigComponent, canActivate: [adminGuard]},
     ]}
 ];

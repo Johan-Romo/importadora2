@@ -26,6 +26,7 @@ export class UpdateProductoComponent implements OnInit {
   public imgSelect : String | ArrayBuffer | null |undefined; 
   public url:any;
   public file: File | undefined;
+  public config_global: any ={};
   
   constructor(
     private _productoService : ProductoService,
@@ -39,6 +40,15 @@ export class UpdateProductoComponent implements OnInit {
 
     this.token= this._adminService.getToken();
     this.url=GLOBAL.url;
+    this._adminService.obtener_config_publico().subscribe(
+      response=>{
+        console.log(response);
+        this.config_global=response.data;
+      },error=>{
+        console.log(error);
+      }
+
+    );
   }
 
   ngOnInit(): void {
@@ -162,7 +172,7 @@ export class UpdateProductoComponent implements OnInit {
       this.imgSelect = 'assets/img/01.jpg'
       this.file=undefined;
     }
-      console.log(this.file);
+      
     }
   
 }

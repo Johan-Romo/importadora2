@@ -7,6 +7,7 @@ var port = process.env.PORT || 4201;
 var cliente_route = require('./routes/cliente');
 var admin_route = require('./routes/admin');
 var producto_route = require('./routes/producto');
+var config_route = require('./routes/config');
 const cors = require('cors');
 
 async function startServer() {
@@ -30,6 +31,7 @@ app.use(cors());
 app.use('/api',cliente_route);
 app.use('/api',admin_route);
 app.use('/api',producto_route);
+app.use('/api',config_route);
 startServer();
 
 module.exports = app;

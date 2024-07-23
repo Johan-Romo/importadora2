@@ -34,6 +34,7 @@ export class CreateProductoComponent implements OnInit{
   imgSelect: any | ArrayBuffer = 'assets/img/01.jpg';
   public config : any ={};
   public token:any ;
+  public config_global : any = {};
 
 
   constructor(
@@ -46,6 +47,15 @@ export class CreateProductoComponent implements OnInit{
     }
 
     this.token= this._adminService.getToken();
+    this._adminService.obtener_config_publico().subscribe(
+      response=>{
+        console.log(response);
+        this.config_global=response.data;
+      },error=>{
+        console.log(error);
+      }
+
+    );
   }
 
   ngOnInit(): void {
