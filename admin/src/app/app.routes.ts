@@ -10,6 +10,9 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 import { ConfigComponent } from './components/config/config.component';
+import { IndexCuponComponent } from './components/cupones/index-cupon/index-cupon.component';
+import { CreateCuponComponent } from './components/cupones/create-cupon/create-cupon.component';
+import { UpdateCuponComponent } from './components/cupones/update-cupon/update-cupon.component';
 export const routes: Routes = [
 
     {path:'', redirectTo: 'inicio',pathMatch: 'full'},
@@ -24,5 +27,9 @@ export const routes: Routes = [
         {path: 'productos/:id', component: UpdateProductoComponent, canActivate: [adminGuard]},
         {path: 'productos/inventario/:id', component: InventarioProductoComponent, canActivate: [adminGuard]},
         {path: 'configuraciones', component: ConfigComponent, canActivate: [adminGuard]},
+        {path: 'cupones/registro', component: CreateCuponComponent, canActivate: [adminGuard]},
+        {path: 'cupones', component: IndexCuponComponent, canActivate: [adminGuard]},
+        {path: 'cupones/:id', component: UpdateCuponComponent, canActivate: [adminGuard]}
+
     ]}
 ];

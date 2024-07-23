@@ -14,7 +14,9 @@ import { IndexProductoComponent } from './components/productos/index-producto/in
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 import { InventarioProductoComponent } from './components/productos/inventario-producto/inventario-producto.component';
 import { ConfigComponent } from './components/config/config.component';
-
+import { IndexCuponComponent } from './components/cupones/index-cupon/index-cupon.component';
+import { CreateCuponComponent } from './components/cupones/create-cupon/create-cupon.component';
+import { UpdateCuponComponent } from './components/cupones/update-cupon/update-cupon.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,7 +38,10 @@ import { ConfigComponent } from './components/config/config.component';
      IndexProductoComponent,
      UpdateProductoComponent,
      InventarioProductoComponent,
-     ConfigComponent 
+     ConfigComponent ,
+     IndexCuponComponent,
+     CreateCuponComponent,
+     UpdateCuponComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
