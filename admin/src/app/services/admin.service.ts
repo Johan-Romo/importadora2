@@ -28,7 +28,14 @@ export class AdminService {
     }
     return '';
   }
-
+  getUserFromToken(): any {
+    const token = this.getToken();
+    if (token) {
+      const helper = new JwtHelperService();
+      return helper.decodeToken(token);
+    }
+    return null;
+  }
   public isAuthenticated(allowRoles: string[]): boolean {
     if (isPlatformBrowser(this.platformId) && window.localStorage) {
       const token = localStorage.getItem('token') || '';

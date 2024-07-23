@@ -75,4 +75,10 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('_id');
+    this._router.navigate(['/login']);
+  }
 }
